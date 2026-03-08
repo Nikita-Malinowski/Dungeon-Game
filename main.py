@@ -30,6 +30,14 @@ ork = {
     "inventory": []
 }
 
+items = {
+    "Heiltrank": {"heal": 20},
+    "Schwert": {"attack": (7, 12)},
+    "Schild": {"hp": 15},
+    "Stoff": {"material": True}
+}
+            
+
 print("Willkommen im Dungeon" ,name )
 
 import random
@@ -114,16 +122,49 @@ while True:
             break
 
     elif choice == "2":
+        print("\n---Spielerwerte---")
         print("Name", player["name"])
         print("HP", player["hp"])
         print("Attack", player["attack"])
         print("gold", player["gold"])
-        print("Inventar", player["inventory"])
+
+        print("\nInventar: ")
+
+        for item in player["inventory"]:
+            print("-", items)
+        
+        use = input("\nitem benutzen?")
+
+        if use in player["inventory"]:
+
+            #Heiltrank
+            if "heal" in items[use]:
+                player["hp"] += items[use]["heal"]
+
+                if player["hp"] > 100:
+                    player["hp"] = 100
+                
+                player["inventory"].remove[use]
+                print("Du hast dich geheilt")
+            
+            #Schwert
+            elif "attack" in items[use]:
+                
+                player["attack"] = items[use]["attack"]
+                print("Du hast ein Schwert ausgerüstet")
+            
+            #Schield
+            elif "hp" in items[use]:
+                player["hp"] = items[use]["hp"]
+                print("Du hast ein Schield ausgerüstet")
+
+            else:
+                print("Dieses Item ist nicht verfügbar")
 
     elif choice == "3":
         print("Du hast das Spiel verlassen.")
         break
     else:
         print("Ungültige Eingabe")
-        
+         
        
